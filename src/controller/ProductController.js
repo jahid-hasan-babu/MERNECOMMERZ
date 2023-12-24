@@ -41,12 +41,24 @@ exports.ProductListByRemark = async (req, res) => {
   return res.status(200).json(result);
 };
 
-exports.ProductListBySmiler = async (req, res) => {};
+exports.ProductListBySmiler = async (req, res) => {
+  let result = await ListBySmilerService(req);
+  return res.status(200).json(result);
+};
 
-exports.ProductListByKeyword = async (req, res) => {};
+exports.ProductDetails = async (req, res) => {
+  let result = await DetailsService(req);
+  return res.status(200).json(result);
+};
 
-exports.ProductDetails = async (req, res) => {};
+exports.ProductListByKeyword = async (req, res) => {
+  let result = await ListByKeyWordService(req);
+  return res.status(200).json(result);
+};
 
-exports.ProductReviewList = async (req, res) => {};
+exports.ProductReviewList = async (req, res) => {
+  let result = await ReviewListService(req);
+  return res.status(200).json(result);
+};
 
 exports.CreateProductReview = async (req, res) => {};
