@@ -5,6 +5,9 @@ const UserController = require("../controller/UserController");
 const AuthVerification = require("../middleware/AuthVerification");
 const WishListController = require("../controller/WishListController");
 const CartListController = require("../controller/CartListController");
+const InvoiceController = require("../controller/InvoiceController");
+const PaymentSettingsController = require("../controller/PaymentSettingsController");
+const FeaturesController = require("../controller/FeaturesController");
 
 //Product
 router.get("/ProductBrandList", ProductController.ProductBrandList);
@@ -67,5 +70,30 @@ router.delete(
   AuthVerification,
   CartListController.RemoveCartList
 );
+
+//for create admin payment settings
+router.post(
+  "/CreatePaymentSettings",
+  PaymentSettingsController.CreatePaymentSettings
+);
+
+//Invoice & Payment
+router.get("/CreateInvoice", AuthVerification, InvoiceController.CreateInvoice);
+router.get("/InvoiceList", AuthVerification, InvoiceController.InvoiceList);
+router.get(
+  "/InvoiceProductList/:invoice_id",
+  AuthVerification,
+  InvoiceController.InvoiceProductList
+);
+
+router.post("/PaymentSuccess/:trxID", InvoiceController.PaymentSuccess);
+router.post("/PaymentCancel/:trxID", InvoiceController.PaymentCancel);
+router.post("/PaymentFail/:trxID", InvoiceController.PaymentFail);
+router.post("/PaymentIPN/:trxID", InvoiceController.PaymentIPN);
+
+//Features
+router.get("/FeaturesList", FeaturesController.FeaturesList);
+//Review
+router.post("/CreateReview", AuthVerification, ProductController.CreateReview);
 
 module.exports = router;

@@ -63,7 +63,7 @@ const SaveProfileService = async (req) => {
     return { status: "fail", message: "Something went wrong" };
   }
 };
-const ReadProfileService = async (req, res) => {
+const ReadProfileService = async (req) => {
   try {
     let user_id = req.headers.user_id;
     let result = await ProfileModel.find({ userID: user_id });

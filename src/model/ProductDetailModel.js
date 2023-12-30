@@ -18,6 +18,6 @@ const DataSchema = mongoose.Schema(
   { timestamps: true, versionKey: false }
 );
 
-const ProductDetailsModel = mongoose.model("productdetails", DataSchema);
+const ProductDetailModel = mongoose.model("productdetails", DataSchema);
 
-module.exports = ProductDetailsModel;
+module.exports = ProductDetailModel;
