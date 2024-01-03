@@ -9,7 +9,7 @@ const {
   ListByRemarkService,
   DetailsService,
   ReviewListService,
-  CreateReviewListService,
+  CreateReviewService,
 } = require("../services/ProductServices");
 
 exports.ProductBrandList = async (req, res) => {
@@ -63,8 +63,6 @@ exports.ProductReviewList = async (req, res) => {
 };
 
 exports.CreateReview = async (req, res) => {
-  let result = await CreateReviewListService(req);
+  let result = await CreateReviewService(req);
   return res.status(200).json(result);
 };
-
-exports.CreateProductReview = async (req, res) => {};
