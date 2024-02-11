@@ -47,11 +47,11 @@ const Footer = () => {
               <h1 className="bodyMedium">About</h1>
               <p>
                 Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum{" "}
+                industry. Lorem Ipsum
               </p>
               <img
                 className="w-75"
-                src="https://www.uiu.ac.bd/wp-content/uploads/2021/02/Card-Logo-Pay-With-01-1.png"
+                src="https://thumbs.dreamstime.com/z/delhi-india-february-popular-credit-card-companies-logos-including-mastercard-visa-american-express-more-211749084.jpg?ct=jpeg"
               />
             </div>
           </div>

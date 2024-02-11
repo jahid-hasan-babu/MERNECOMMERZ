@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import Layout from "../components/layout/Layout";
 import ProductStore from "../store/ProductStore";
 import FeatureStore from "../store/FeaturesStore.js";
@@ -17,6 +17,7 @@ const HomePage = () => {
   } = ProductStore();
 
   const { FeatureListRequest } = FeatureStore();
+
   useEffect(() => {
     (async () => {
       await SliderListRequest();

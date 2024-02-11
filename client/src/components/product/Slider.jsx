@@ -16,7 +16,7 @@ const Slider = () => {
           className="carousel hero-bg carousel-dark slide"
         >
           <div className="carousel-indicators">
-            {SliderList.map((item, i) => {
+            {SliderList.map((_, i) => {
               return (
                 <button
                   key={i}

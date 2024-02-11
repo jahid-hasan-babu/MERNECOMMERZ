@@ -13,22 +13,23 @@ const BrandSkeleton = () => {
             Explore a World of Choices Across Our Most Popular <br />
             Shopping Categories
           </span>
-          {Array.from({ length: 16 }).map(() => {
+          {Array.from({ length: 16 }).map((_, i) => {
             return (
-              <>
-                <div className="col-6 col-lg-8r text-center col-md-8r p-2">
-                  <div className="card h-100 rounded-3 bg-light">
-                    <div className="card-body">
-                      <Lottie
-                        className="w-100"
-                        animationData={ImagePlaceholder}
-                        loop={true}
-                      />
-                      <Skeleton count={1} />
-                    </div>
+              <div
+                className="col-6 col-lg-8r text-center col-md-8r p-2"
+                key={i}
+              >
+                <div className="card h-100 rounded-3 bg-light">
+                  <div className="card-body">
+                    <Lottie
+                      className="w-100"
+                      animationData={ImagePlaceholder}
+                      loop={true}
+                    />
+                    <Skeleton count={1} />
                   </div>
                 </div>
-              </>
+              </div>
             );
           })}
         </div>
