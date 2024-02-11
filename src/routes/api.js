@@ -39,6 +39,8 @@ router.get(
   ProductController.ProductReviewList
 );
 
+router.post("/ProductListByFilter", ProductController.ProductListByFilter);
+
 //User
 router.get("/UserOTP/:email", UserController.UserOTP);
 router.get("/VerifyLogin/:email/:otp", UserController.VerifyLogin);
