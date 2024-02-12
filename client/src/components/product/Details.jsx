@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import ProductStore from "../../store/ProductStore";
 import DetailsSkeleton from "../../skeleton/DetailsSkeleton";
 import ProductImage from "./ProductImage";
+import parse from "html-react-parser";
+import Review from "./Review";
 
 const Details = () => {
   const { Details, ReviewList } = ProductStore();
+  const [quantity, SetQuantity] = useState(1);
+
+  const incrementQuantity = () => {
+    SetQuantity((quantity) => quantity + 1);
+  };
+
+  const decrementQuantity = () => {
+    if (quantity > 1) {
+      SetQuantity((quantity) => quantity - 1);
+    }
+  };
   if (Details === null) {
     return <DetailsSkeleton />;
   }
@@ -16,36 +29,75 @@ const Details = () => {
             <ProductImage />
           </div>
           <div className="col-md-5 p-3">
-            <h4>Title</h4>
-            <p className="text-muted bodySmall my-1">category</p>
-            <p className="text-muted bodySmall my-1">brand</p>
-            <p className="bodySmall mb-2 mt-1">shortDes</p>
-            <span>
-              <strike className="text-secondary">$price</strike> $ discountPrice
-            </span>
+            <h4>{Details[0]["title"]}</h4>
+            <p className="text-muted bodySmall my-1">
+              Category: {Details[0]["category"]["categoryName"]}
+            </p>
+            <p className="text-muted bodySmall my-1">
+              Brand: {Details[0]["brand"]["brandName"]}
+            </p>
+            <p className="bodySmall mb-2 mt-1">{Details[0]["shortDes"]}</p>
+
+            {Details[0]["discount"] ? (
+              <span className="bodyXLarge">
+                Price:
+                <strike className="text-secondary m-lg-2">
+                  ${Details[0]["price"]}
+                </strike>
+                ${Details[0]["discountPrice"]}
+              </span>
+            ) : (
+              <span className="bodyXLarge">Price: ${Details[0]["price"]}</span>
+            )}
+
             <div className="row">
               <div className="col-4 p-2">
                 <label className="bodySmall">Size</label>
                 <select className="form-control my-2 form-select">
                   <option value="">Size</option>
+                  {Details[0]["details"]["size"].split(",").map((item, i) => {
+                    return (
+                      <option value={item} key={i}>
+                        {item}
+                      </option>
+                    );
+                  })}
                 </select>
               </div>
               <div className="col-4 p-2">
                 <label className="bodySmall">Color</label>
                 <select className="form-control my-2 form-select">
                   <option value="">Color</option>
+                  {Details[0]["details"]["color"].split(",").map((item, i) => {
+                    return (
+                      <option value={item} key={i}>
+                        {item}
+                      </option>
+                    );
+                  })}
                 </select>
               </div>
               <div className="col-4 p-2">
                 <label className="bodySmall">Quantity</label>
                 <div className="input-group my-2">
-                  <button className="btn btn-outline-secondary">-</button>
+                  <button
+                    onClick={decrementQuantity}
+                    className="btn btn-outline-secondary"
+                  >
+                    -
+                  </button>
                   <input
+                    value={quantity}
                     type="text"
                     className="form-control bg-light text-center"
                     readOnly
                   />
-                  <button className="btn btn-outline-secondary">+</button>
+                  <button
+                    onClick={incrementQuantity}
+                    className="btn btn-outline-secondary"
+                  >
+                    +
+                  </button>
                 </div>
               </div>
               <div className="col-4 p-2">
@@ -95,14 +147,18 @@ const Details = () => {
               role="tabpanel"
               aria-labelledby="Speci-tab"
               tabIndex="0"
-            ></div>
+            >
+              {parse(Details[0]["details"]["des"])}
+            </div>
             <div
               className="tab-pane fade"
               id="Review-tab-pane"
               role="tabpanel"
               aria-labelledby="Review-tab"
               tabIndex="0"
-            ></div>
+            >
+              <Review />
+            </div>
           </div>
         </div>
       </div>
