@@ -12,6 +12,7 @@ import TermsPage from "./pages/TermsPage";
 import HowToBuy from "./pages/HowToBuy";
 import ContactPage from "./pages/ContactPage";
 import ComplainPage from "./pages/ComplainPage";
+import LoginPage from "./pages/LoginPage";
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
         <Route path="/how-to-buy" element={<HowToBuy />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/complain" element={<ComplainPage />} />
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </BrowserRouter>
   );
