@@ -14,7 +14,7 @@ const LoginForm = () => {
       toast.error("Valid Email Address Required");
     } else {
       let res = await UserOTPRequest(LoginFormData.email);
-      res ? navigate("/otp") : toast.error("Something Went Wrong");
+      res ? navigate("/otp") : toast.error("Something Went Wrong !");
     }
   };
   return (

@@ -1,13 +1,27 @@
 import { create } from "zustand";
 import axios from "axios";
 import { getEmail, setEmail } from "../utility/utility";
+import Cookies from "js-cookie";
 
 const UserStore = create((set) => ({
+  isLogin: () => {
+    return !!Cookies.get("token");
+  },
   LoginFormData: { email: "" },
   LoginFormOnChange: (name, value) => {
     set((state) => ({
       LoginFormData: {
         ...state.LoginFormData,
+        [name]: value,
+      },
+    }));
+  },
+
+  OTPFormData: { otp: "" },
+  OTPFormOnChange: (name, value) => {
+    set((state) => ({
+      OTPFormData: {
+        ...state.OTPFormData,
         [name]: value,
       },
     }));

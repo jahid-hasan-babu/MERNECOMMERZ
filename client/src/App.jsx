@@ -13,6 +13,7 @@ import HowToBuy from "./pages/HowToBuy";
 import ContactPage from "./pages/ContactPage";
 import ComplainPage from "./pages/ComplainPage";
 import LoginPage from "./pages/LoginPage";
+import OTPPage from "./pages/OTPPage";
 
 const App = () => {
   return (
@@ -31,6 +32,7 @@ const App = () => {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/complain" element={<ComplainPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/otp" element={<OTPPage />} />
       </Routes>
     </BrowserRouter>
   );
