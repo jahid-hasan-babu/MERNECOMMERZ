@@ -1,9 +1,22 @@
 import React from "react";
 import UserSubmitButton from "./UserSubmitButton";
 import UserStore from "../../store/UserStore";
+import ValidationHelper from "./../../utility/ValidationHelper";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
-  let { LoginFormData, LoginFormOnChange } = UserStore();
+  let navigate = useNavigate();
+  let { LoginFormData, LoginFormOnChange, UserOTPRequest } = UserStore();
+
+  const onFromSubmit = async () => {
+    if (!ValidationHelper.IsEmail(LoginFormData.email)) {
+      toast.error("Valid Email Address Required");
+    } else {
+      let res = await UserOTPRequest(LoginFormData.email);
+      res ? navigate("/otp") : toast.error("Something Went Wrong");
+    }
+  };
   return (
     <div className="container section">
       <div className="row d-flex justify-content-center">
@@ -22,7 +35,11 @@ const LoginForm = () => {
               type="email"
               className="form-control"
             />
-            <UserSubmitButton className="btn mt-3 btn-success" text="Next" />
+            <UserSubmitButton
+              onClick={onFromSubmit}
+              className="btn mt-3 btn-success"
+              text="Next"
+            />
           </div>
         </div>
       </div>
