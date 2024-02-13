@@ -4,10 +4,15 @@ import DetailsSkeleton from "../../skeleton/DetailsSkeleton";
 import ProductImage from "./ProductImage";
 import parse from "html-react-parser";
 import Review from "./Review";
+import CartStore from "../../store/CartStore";
+import toast from "react-hot-toast";
+import CartSubmitButton from "../cart/CartSubmitButton";
 
 const Details = () => {
   const { Details, ReviewList } = ProductStore();
   const [quantity, SetQuantity] = useState(1);
+  const { CartSaveRequest, CartForm, CartListRequest, CartFormChange } =
+    CartStore();
 
   const incrementQuantity = () => {
     SetQuantity((quantity) => quantity + 1);
@@ -16,6 +21,13 @@ const Details = () => {
   const decrementQuantity = () => {
     if (quantity > 1) {
       SetQuantity((quantity) => quantity - 1);
+    }
+  };
+  const AddCart = async (productID) => {
+    let res = await CartSaveRequest(CartForm, productID, quantity);
+    if (res) {
+      toast.success("Cart Item Added");
+      await CartListRequest();
     }
   };
   if (Details === null) {
@@ -52,8 +64,14 @@ const Details = () => {
 
             <div className="row">
               <div className="col-4 p-2">
-                <label className="bodySmall">Size</label>
-                <select className="form-control my-2 form-select">
+                <label className="bodySmal">Size</label>
+                <select
+                  value={CartForm.size}
+                  onChange={(e) => {
+                    CartFormChange("size", e.target.value);
+                  }}
+                  className="form-control my-2 form-select"
+                >
                   <option value="">Size</option>
                   {Details[0]["details"]["size"].split(",").map((item, i) => {
                     return (
@@ -64,9 +82,15 @@ const Details = () => {
                   })}
                 </select>
               </div>
-              <div className="col-4 p-2">
-                <label className="bodySmall">Color</label>
-                <select className="form-control my-2 form-select">
+              <div className="col-4  p-2">
+                <label className="bodySmal">Color</label>
+                <select
+                  value={CartForm.color}
+                  onChange={(e) => {
+                    CartFormChange("color", e.target.value);
+                  }}
+                  className="form-control my-2 form-select"
+                >
                   <option value="">Color</option>
                   {Details[0]["details"]["color"].split(",").map((item, i) => {
                     return (
@@ -77,8 +101,8 @@ const Details = () => {
                   })}
                 </select>
               </div>
-              <div className="col-4 p-2">
-                <label className="bodySmall">Quantity</label>
+              <div className="col-4  p-2">
+                <label className="bodySmal">Quantity</label>
                 <div className="input-group my-2">
                   <button
                     onClick={decrementQuantity}
@@ -100,11 +124,23 @@ const Details = () => {
                   </button>
                 </div>
               </div>
-              <div className="col-4 p-2">
-                <button className="btn w-100 btn-success">Add to Cart</button>
+              <div className="col-4  p-2">
+                <CartSubmitButton
+                  onClick={async () => {
+                    await AddCart(Details[0]["_id"]);
+                  }}
+                  className="btn w-100 btn-success"
+                  text="Add to Cart"
+                />
               </div>
-              <div className="col-4 p-2">
-                <button className="btn w-100 btn-success">Add to Wish</button>
+              <div className="col-4  p-2">
+                {/* <WishSubmitButton
+                  onClick={async () => {
+                    await AddWish(Details[0]["_id"]);
+                  }}
+                  className="btn w-100 btn-success"
+                  text="Add to Wish"
+                /> */}
               </div>
             </div>
           </div>
