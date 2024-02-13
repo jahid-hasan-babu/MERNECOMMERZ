@@ -1,12 +1,21 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../assets/images/plainb-logo.svg";
 import ProductStore from "../../store/ProductStore";
 import UserStore from "../../store/UserStore";
+import UserSubmitButton from "../user/UserSubmitButton";
 
 const AppNavBar = () => {
   const { SearchKeyword, SetSearchKeyword } = ProductStore();
-  const { isLogin } = UserStore();
+  const { isLogin, UserLogoutRequest } = UserStore();
+  const navigate = useNavigate();
+
+  const onLogout = async () => {
+    await UserLogoutRequest();
+    sessionStorage.clear();
+    localStorage.clear();
+    navigate("/");
+  };
 
   return (
     <>
@@ -109,13 +118,12 @@ const AppNavBar = () => {
 
             {isLogin() ? (
               <>
-                <Link
-                  type="button"
+                <UserSubmitButton
+                  onClick={onLogout}
+                  text="Logout"
                   className="btn ms-3 btn-success d-flex"
-                  to="/login"
-                >
-                  Logout
-                </Link>
+                />
+
                 <Link
                   type="button"
                   className="btn ms-3 btn-success d-flex"
