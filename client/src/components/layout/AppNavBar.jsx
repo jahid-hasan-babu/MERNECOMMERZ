@@ -5,12 +5,13 @@ import ProductStore from "../../store/ProductStore";
 import UserStore from "../../store/UserStore";
 import UserSubmitButton from "../user/UserSubmitButton";
 import CartStore from "../../store/CartStore";
+import WishStore from "../../store/WishStore";
 
 const AppNavBar = () => {
   const { SearchKeyword, SetSearchKeyword } = ProductStore();
   const { isLogin, UserLogoutRequest } = UserStore();
   const { CartCount, CartListRequest } = CartStore();
-  // const {WishCount,WishListRequest}=WishStore();
+  const { WishCount, WishListRequest } = WishStore();
   const navigate = useNavigate();
 
   const onLogout = async () => {
@@ -23,6 +24,7 @@ const AppNavBar = () => {
     (async () => {
       if (isLogin()) {
         await CartListRequest();
+        await WishListRequest();
       }
     })();
   }, []);
@@ -111,13 +113,6 @@ const AppNavBar = () => {
                 </svg>
               </Link>
             </div>
-            <Link
-              to="/wish"
-              type="button"
-              className="btn ms-2 btn-light d-flex"
-            >
-              <i className="bi text-dark bi-heart"></i>
-            </Link>
 
             {isLogin() ? (
               <>
@@ -132,7 +127,17 @@ const AppNavBar = () => {
                     <span className="visually-hidden">unread messages</span>
                   </span>
                 </Link>
-
+                <Link
+                  to="/wish"
+                  type="button"
+                  className="btn ms-4 btn-light position-relative"
+                >
+                  <i className="bi text-dark bi-heart"></i>
+                  <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning">
+                    {WishCount}
+                    <span className="visually-hidden">unread messages</span>
+                  </span>
+                </Link>
                 <UserSubmitButton
                   onClick={onLogout}
                   text="Logout"
