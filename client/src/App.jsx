@@ -15,6 +15,10 @@ import ComplainPage from "./pages/ComplainPage";
 import LoginPage from "./pages/LoginPage";
 import OTPPage from "./pages/OTPPage";
 import ProfilePage from "./pages/ProfilePage";
+import WishPage from "./pages/WishPage";
+import CartPage from "./pages/CartPage";
+import OrderPage from "./pages/OrderPage";
+import InvoicePage from "./pages/InvoicePage";
 
 const App = () => {
   return (
@@ -35,6 +39,10 @@ const App = () => {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/otp" element={<OTPPage />} />
+        <Route path="/wish" element={<WishPage />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/orders" element={<OrderPage />} />
+        <Route path="/invoice/:id" element={<InvoicePage />} />
       </Routes>
     </BrowserRouter>
   );

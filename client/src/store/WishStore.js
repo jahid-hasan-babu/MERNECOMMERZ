@@ -29,6 +29,15 @@ const WishStore = create((set) => ({
       unauthorized(e.response.status);
     }
   },
+
+  RemoveWishListRequest: async (productID) => {
+    try {
+      set({ WishList: null });
+      await axios.delete(`/api/v1/RemoveWishList`, { productID: productID });
+    } catch (e) {
+      unauthorized(e.response.status);
+    }
+  },
 }));
 
 export default WishStore;

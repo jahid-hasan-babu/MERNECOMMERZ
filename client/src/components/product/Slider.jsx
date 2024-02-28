@@ -1,7 +1,7 @@
 import React from "react";
-import ProductStore from "../../store/ProductStore";
-import SliderSkeleton from "./../../skeleton/SliderSkeleton";
+import ProductStore from "../../store/ProductStore.js";
 import { Link } from "react-router-dom";
+import SliderSkeleton from "./../../skeleton/SliderSkeleton";
 
 const Slider = () => {
   const { SliderList } = ProductStore();
@@ -16,7 +16,7 @@ const Slider = () => {
           className="carousel hero-bg carousel-dark slide"
         >
           <div className="carousel-indicators">
-            {SliderList.map((_, i) => {
+            {SliderList.map((item, i) => {
               return (
                 <button
                   key={i}

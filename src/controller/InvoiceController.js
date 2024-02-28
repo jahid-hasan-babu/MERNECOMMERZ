@@ -14,18 +14,18 @@ exports.CreateInvoice = async (req, res) => {
 };
 
 exports.PaymentSuccess = async (req, res) => {
-  let result = await PaymentSuccessService(req);
-  return res.status(200).json(result);
+  await PaymentSuccessService(req);
+  return res.redirect("/orders");
 };
 
 exports.PaymentFail = async (req, res) => {
-  let result = await PaymentFailService(req);
-  return res.status(200).json(result);
+  await PaymentFailService(req);
+  return res.redirect("/orders");
 };
 
 exports.PaymentCancel = async (req, res) => {
-  let result = await PaymentCancelService(req);
-  return res.status(200).json(result);
+  await PaymentCancelService(req);
+  return res.redirect("/orders");
 };
 
 exports.PaymentIPN = async (req, res) => {

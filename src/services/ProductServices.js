@@ -374,7 +374,7 @@ const CreateReviewService = async (req) => {
     });
     return { status: "success", data: data };
   } catch (e) {
-    return { status: "fail", data: e }.toString();
+    return { status: "fail", data: e.toString() };
   }
 };
 

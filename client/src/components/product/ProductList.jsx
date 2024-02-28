@@ -56,7 +56,9 @@ const ProductList = () => {
               {BrandList !== null ? (
                 BrandList.map((item, i) => {
                   return (
-                    <option value={item["_id"]}>{item["brandName"]}</option>
+                    <option key={i} value={item["_id"]}>
+                      {item["brandName"]}
+                    </option>
                   );
                 })
               ) : (
@@ -75,7 +77,9 @@ const ProductList = () => {
               {CategoryList !== null ? (
                 CategoryList.map((item, i) => {
                   return (
-                    <option value={item["_id"]}>{item["categoryName"]}</option>
+                    <option key={i} value={item["_id"]}>
+                      {item["categoryName"]}
+                    </option>
                   );
                 })
               ) : (
