@@ -2,7 +2,7 @@ import React from "react";
 import UserSubmitButton from "./UserSubmitButton";
 import UserStore from "../../store/UserStore";
 import ValidationHelper from "./../../utility/ValidationHelper";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
@@ -43,6 +43,7 @@ const LoginForm = () => {
           </div>
         </div>
       </div>
+      <Toaster position="bottom-center" />
     </div>
   );
 };

@@ -2,7 +2,7 @@ import React from "react";
 import UserSubmitButton from "./UserSubmitButton.jsx";
 import UserStore from "../../store/UserStore.js";
 import ValidationHelper from "../../utility/ValidationHelper.js";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 const OTPForm = () => {
@@ -45,6 +45,7 @@ const OTPForm = () => {
           </div>
         </div>
       </div>
+      <Toaster position="bottom-center" />
     </div>
   );
 };

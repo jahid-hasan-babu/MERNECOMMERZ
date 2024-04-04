@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api/": {
-        target: "mernecommerz.vercel.app",
+        target: "http://localhost:9000",
       },
     },
   },
