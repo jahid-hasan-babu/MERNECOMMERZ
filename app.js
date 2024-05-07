@@ -5,7 +5,8 @@ const router = require("./src/routes/api");
 const path = require("path");
 require("dotenv").config();
 
-const URL = process.env.DATABASE_URL;
+const URL =
+  "mongodb+srv://jahidhasan:jahid246578@cluster0.u5gekv5.mongodb.net/MERN_ECOMMERZ";
 
 const cookieParser = require("cookie-parser");
 
